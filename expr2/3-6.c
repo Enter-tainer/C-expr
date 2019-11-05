@@ -7,7 +7,7 @@ int main () {
     // since most machine use little edian, the visit is from low to high
     printf("%u.%u.%u.%u", 0xff & ptr[3],
                           0xff & ptr[2],
-                          ptr[1],
-                          ptr[0]);
+                          0xff & ptr[1],
+                          0xff & ptr[0]);
   }
 }
