@@ -1,5 +1,5 @@
 #include <stdio.h>
-int char_count, word_count, line_count;
+int char_count, word_count, line_count = 1;
 char ch;
 int state;
 enum { kchn, keng, kendl, kspc };
@@ -48,6 +48,7 @@ int main() {
       fill_ch();
       fill_ch();
       ++word_count;
+      --char_count;
       set_state();
       break;
     }
@@ -63,12 +64,14 @@ int main() {
     }
     case kendl: {
       ++line_count;
+      --char_count;
       fill_ch();
       set_state();
       break;
     }
     case kspc: {
       fill_ch();
+      --char_count;
       set_state();
       break;
     }
