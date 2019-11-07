@@ -10,12 +10,12 @@ int main () {
       }
     if (flag == 1)
     //       ^^
-    // 应为 ==
+    // should be ==
       printf("%d is not prime\n", x);
     else
       printf("%d is prime\n", x);
     flag = 0;
     //^^^^^^
-    // 重设 flag
+    // reset flag
   }
 }

@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 double calc_tax(double x) {
+  // calc tax with if
   if (x < 1000) {
     return 0;
   } else if (x < 2000) {
@@ -17,6 +18,7 @@ double calc_tax(double x) {
 }
 
 double calc_tax_switch(double x) {
+  // calc tax with switch
   int t = x / 1000;
   switch (t) {
     case 0:

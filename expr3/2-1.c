@@ -1,3 +1,4 @@
+// this program is rewritten with while loop
 #include <stdio.h>
 int main() {
   int i, x, k, flag = 0;

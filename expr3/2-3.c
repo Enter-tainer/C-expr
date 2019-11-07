@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 int is_composite(int n) {
+  // this function return true is n is a composite number
   int i, k, flag = 0;
   i = 2, k = n >> 1;
   do {
@@ -18,12 +19,13 @@ int is_composite(int n) {
 }
 
 int is_pure_composite(int n) {
+  // this recurisive function return ture if n is a pure composite number
   if (n < 10)
     return is_composite(n);
   return is_composite(n) && is_pure_composite(n / 10);
 }
 
-int main () {
+int main() {
   for (int i = 100; i <= 999; ++i) {
     if (is_pure_composite(i))
       printf("%d\n", i);
