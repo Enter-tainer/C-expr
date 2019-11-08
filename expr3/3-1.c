@@ -38,6 +38,7 @@ double calc_tax_switch(double x) {
 
 int main () {
   double x;
+  printf("输入你的工资：");
   scanf("%lf", &x);
-  printf("%lf %lf\n", calc_tax(x), calc_tax_switch(x));
+  printf("你需要缴税：%lf（if） %lf（switch）\n", calc_tax(x), calc_tax_switch(x));
 }
