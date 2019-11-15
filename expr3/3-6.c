@@ -4,7 +4,7 @@ int p;
 
 void fight(double a, double b, int cnt) {
   if (cnt == 4) {
-    p += (fabs(a - b) >= 1000);
+    p += (fabs(a - b) < 1000);
   } else {
     fight(a * 0.75, b + a * 0.25, cnt + 1);
     fight(a + b * 0.25, b * 0.75, cnt + 1);
