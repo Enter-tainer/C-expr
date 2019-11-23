@@ -14,9 +14,9 @@ void print_map() {
       if (map[i][j] == 0)
         printf("  ");
       else if (map[i][j] == 1)
-        printf("= ");
+        printf("# ");
       else if (map[i][j] == 8)
-        printf("* ");
+        printf("\033[1;31m* \033[0m");
     }
     puts("");
   }
