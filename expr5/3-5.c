@@ -18,10 +18,17 @@ void push_back_vec(vecvector* v, const intvector* data) {
 
 void push_back_int(intvector* v, int x) { v->data[v->size++] = x; }
 
-vecvector ans[11];
+int in_vec(const intvector *v, int x) {
+  for (int i = 0 ; i < v->size; ++i) {
+    if (v->data[i] == x)
+      return 1;
+  }
+  return 0;
+}
+
+vecvector ans[15];
 
 vecvector* divide_number(int n) {
-  // return a char[1000][100]
   if (ans[n].size != 0) {
     return &ans[n];
   }
@@ -54,7 +61,7 @@ int hash(const intvector* s) {
   return res;
 }
 
-char occured[10000000];
+intvector occured;
 
 int main() {
   intvector tmp;
@@ -70,9 +77,9 @@ int main() {
   }
   for (int i = 0; i < ans[n].size; ++i) {
     int hs = hash(&ans[n].data[i]);
-    if (occured[hs])
+    if (in_vec(&occured, hs))
       continue;
-    occured[hs] = 1;
+    push_back_int(&occured, hs);
     for (int j = 0; j < ans[n].data[i].size; ++j) {
       printf("%d ", ans[n].data[i].data[j]);
       if (j != ans[n].data[i].size - 1)
