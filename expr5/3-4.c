@@ -24,6 +24,7 @@ int main() {
   for (int i = 1; i <= n; ++i)
     for (int j = 1; j <= m; ++j)
       scanf("%d", &p[i][j]);
+  puts("");
   eliminate();
   for (int i = 1; i <= n; ++i) {
     for (int j = 1; j <= m; ++j) {

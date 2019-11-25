@@ -12,7 +12,7 @@ int main() {
     for (k = 1; k <= N; k++)
       if (++j > i - 1)
         j = 0;
-    b[M - i] = j ? a[j - 1] : ((j = i), a[i - 1]);
+    b[M - i] = j ? a[j - 1] : a[(j = i) - 1];
     if (j)
       for (k = --j; k < i; k++)
         a[k] = k + 1 < i ? a[k + 1] : -1;
