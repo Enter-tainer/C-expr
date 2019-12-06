@@ -47,11 +47,6 @@ mint mul(const mint* a, const mint* b) {
       }
     }
   }
-  for (int i = 499; i >= 1; --i)
-    if (t.d[i]) {
-      t.len = 1 + i;
-      break;
-    }
   for (int j = 0; j < t.len; ++j) {
     if (t.d[j] >= 10) {
       int c = t.d[j] / 10;
@@ -59,6 +54,12 @@ mint mul(const mint* a, const mint* b) {
       t.d[j + 1] += c;
       if (j == t.len - 1)
         ++t.len;
+    }
+  }
+  for (int i = 499; i >= 1; --i) {
+    if (t.d[i]) {
+      t.len = 1 + i;
+      break;
     }
   }
   return t;
