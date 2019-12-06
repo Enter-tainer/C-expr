@@ -11,7 +11,7 @@ f(0) f(1) f(2) f(3) f(4) f(5) f(6) f(7)
     continue;                                                                  \
   }
 
-    typedef void (*func_t)(void);
+typedef void (*func_t)(void);
 void execute(func_t a[], int n) {
   for (int i = 0; i < n; i++) {
     a[i]();
