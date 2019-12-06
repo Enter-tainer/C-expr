@@ -5,17 +5,17 @@ int remove_same(int a[], int n) {
   int *first = a, *last = a + n;
   if (first == last)
     return n;
-
-  int * result = first;
+  int* result = first;
   while (++first != last) {
-    if (!(*result == *first) && ++result != first) {
+    if (*result != *first) {
+      ++result;
       *result = *first;
     }
   }
   return 1 + result - a;
 }
 
-int main () {
+int main() {
   int num[100], n;
   scanf("%d", &n);
   for (int i = 0; i < n; ++i)
