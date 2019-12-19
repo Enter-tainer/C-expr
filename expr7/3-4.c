@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 typedef struct node node;
 typedef struct single_list single_list;
 
@@ -112,73 +113,63 @@ int iseq(const int* a, const int* b) { return *a == *b; }
 
 from_heap(int);
 
-typedef struct student {
-  int id;
-  char name[16];
-  int eng;
-  int mat;
-  int phy;
-  int cpl;
-} student;
+single_list read_num(single_list x) {
+  char buff[1000];
+  fgets(buff, sizeof(buff), stdin);
+  int len = strlen(buff);
+  for (int i = 0; i < len - 1; i++)
+    x = push_front_list(x, from_heap_int(buff[i] - '0'));
+  return x;
+}
 
-int get_choice() {
-  printf("\t\t1. Input data\n");
-  printf("\t\t2. Ouput data\n");
-  printf("\t\t3. Modify data of someone\n");
-  printf("\t\t4. Ouput avg mark\n");
-  printf("\t\t5. Output data & avg mark & sum\n");
-  printf("\t\t6. Exit\n");
-  int c;
-  scanf("%d", &c);
-  return c;
+void print_node(node* n) {
+  if (n) {
+    print_node(n->next);
+    putchar('0' + *((int*)n->data));
+  }
+}
+
+void print_num(single_list x) { print_node(x.head->next); }
+
+single_list plus(single_list a, single_list b) {
+  single_list z = init_list();
+  int inc = 0;
+  if (a.size < b.size) {
+    single_list x = a;
+    a             = b;
+    b             = x;
+  }
+  while (b.size) {
+    int numa = *(access_list(int)(a, 0)), numb = *access_list(int)(b, 0);
+    a = pop_front_list(a);
+    b = pop_front_list(b);
+    int nextv = numa + numb + inc;
+    inc       = nextv / 10;
+    nextv %= 10;
+    z = push_front_list(z, from_heap_int(nextv));
+  }
+  while (a.size) {
+    int num = *access_list(int)(a, 0);
+    a = pop_front_list(a);
+    int nextv = num + inc;
+    inc = nextv / 10;
+    nextv %= 10;
+    z = push_front_list(z, from_heap_int(nextv));
+  }
+  if (inc) {
+    z = push_front_list(z, from_heap_int(inc));
+  }
+  return z;
 }
 
 int main() {
-  single_list s = init_list();
-  int choice    = 0;
-  while ((choice = get_choice()) != 6) {
-    if (choice == 1) {
-      printf("Input n and <id> <name> <eng> <mat> <phy> <cpl>, one student per "
-             "line\n");
-      int n;
-      scanf("%d", &n);
-      while (n--) {
-        student* stu = malloc(sizeof(student));
-        scanf("%d %s %d %d %d %d", &stu->id, &stu->name, &stu->eng, &stu->mat,
-              &stu->phy, &stu->cpl);
-        s = push_back_list(s, stu);
-      }
-
-    } else if (choice == 2) {
-      int idx = 0;
-      for (node* i = s.head->next; i; i = i->next, idx++) {
-        student* stu = i->data;
-        printf("%d: %d %s %d %d %d %d\n", idx, stu->id, stu->name, stu->eng,
-               stu->mat, stu->phy, stu->cpl);
-      }
-    } else if (choice == 3) {
-      printf("Input student idx and <id> <name> <eng> <mat> <phy> <cpl>\n");
-      student stu, *tbmdf;
-      int idx;
-      scanf("%d %d %s %d %d %d %d", &idx, &stu.id, &stu.name, &stu.eng,
-            &stu.mat, &stu.phy, &stu.cpl);
-      tbmdf  = access_list(student)(s, idx);
-      *tbmdf = stu;
-    } else if (choice == 4) {
-      double sum = 0;
-      for (node* i = s.head->next; i; i = i->next) {
-        student* stu = i->data;
-        sum          += stu->cpl + stu->mat + stu->eng + stu->phy;
-      }
-      printf("avg: %.2lf\n", sum / 4.0 / s.size);
-    } else if (choice == 5) {
-      for (node* i = s.head->next; i; i = i->next) {
-        double sum   = 0;
-        student* stu = i->data;
-        sum          = stu->cpl + stu->mat + stu->eng + stu->phy;
-        printf("%d %s sum: %lf avg: %lf\n", stu->id, stu->name, sum, sum / 4);
-      }
-    }
-  }
-  drop_list(s);
+  single_list x = init_list(), y = init_list(), z;
+  x = read_num(x);
+  y = read_num(y);
+  z = plus(x, y);
+  for (node* i = z.head->next; i; i = i->next)
+    putchar('0' + *((int*)(i->data)));
+  drop_list(z);
+  drop_list(x);
+  drop_list(y);
 }

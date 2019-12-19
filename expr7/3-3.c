@@ -228,4 +228,5 @@ int main() {
       s = sort_list(s);
     }
   }
+  drop_list(s);
 }
