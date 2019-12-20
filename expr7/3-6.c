@@ -134,7 +134,7 @@ void print_map() {
     }
     puts("");
   }
-  // exit(0);
+  exit(0);
 }
 
 void dfs(int x, int y, int step) {
@@ -156,30 +156,7 @@ typedef struct dfs_data {
 
 from_heap(dfs_data);
 
-void list_dfs() {
-  single_list s = init_list();
-  dfs_data init = {0, 0, 2, 0};
-  s             = push_front_list(s, from_heap_dfs_data(init));
-  while (s.size != 0) {
-    dfs_data top_data = *access_list(dfs_data)(s, 0);
-    for (int i = 0; i < 8; ++i) {
-      if (isvalid(top_data.x, top_data.y, dx[i], dy[i])) {
-        map[top_data.x + dx[i]][top_data.y + dy[i]] = top_data.step;
-        if (top_data.step == 64) {
-          print_map();
-          drop_list(s);
-          return;
-        }
-        dfs_data new_data = {top_data.x + dx[i], top_data.y + dy[i],
-                             top_data.step + 1};
-        s                 = push_front_list(s, from_heap_dfs_data(new_data));
-      }
-    }
-  }
-}
-
 int main() {
   map[0][0] = 1;
-  // dfs(0, 0, 2);
-  list_dfs();
+  dfs(0, 0, 2);
 }
