@@ -6,7 +6,7 @@ typedef struct single_list single_list;
 struct node
 {
   void *data;
-  node *prev, *next;
+  node *next;
 };
 
 struct single_list
@@ -20,7 +20,7 @@ single_list init_list()
   single_list x;
   x.size = 0;
   x.head = malloc(sizeof(node));
-  x.head->prev = x.head->next = x.head->data = NULL;
+  x.head->next = x.head->data = NULL;
   return x;
 }
 
