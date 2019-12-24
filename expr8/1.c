@@ -11,7 +11,7 @@ int main (void) {
   fp2 = fopen("./test2.txt", "w+");
   fwrite(&a, sizeof(short), 1, fp1);
   fwrite(&b, sizeof(short), 1, fp1);
-  fprintf(fp2, "%d %d", a, b);
+  fprintf(fp2, "%hx %hx", a, b);
 
   rewind(fp1);
   rewind(fp2);
